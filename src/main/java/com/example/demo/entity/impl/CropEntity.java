@@ -1,12 +1,12 @@
 package com.example.demo.entity.impl;
 
 import com.example.demo.entity.SuperEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,4 +21,6 @@ public class CropEntity implements SuperEntity {
     private String category;
     private String season;
     private String cropImage;
+    @ManyToMany(mappedBy = "cropList",cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<LogEntity> logList;
 }

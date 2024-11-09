@@ -25,4 +25,11 @@ public class LogEntity {
             inverseJoinColumns = @JoinColumn(name = "memberCode")
     )
     private List<StaffEntity> staffList;
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinTable(
+            name = "log_crop_details",
+            joinColumns = @JoinColumn(name = "logCode"),
+            inverseJoinColumns = @JoinColumn(name = "cropCode")
+    )
+    private List<StaffEntity> cropList;
 }
