@@ -22,4 +22,11 @@ public class FieldEntity {
     private String fieldImage2;
     @ManyToMany(mappedBy = "fieldList")
     private List<EquipmentEntity> equipmentsList;
+    @ManyToMany
+    @JoinTable(
+            name = "field_staff_details",
+            joinColumns = @JoinColumn(name = "fieldCode"),
+            inverseJoinColumns = @JoinColumn(name = "memberCode")
+    )
+    private List<StaffEntity> staffList;
 }

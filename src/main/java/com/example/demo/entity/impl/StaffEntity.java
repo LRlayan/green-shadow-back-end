@@ -35,4 +35,6 @@ public class StaffEntity {
     private List<StaffEquipmentDetails> staffEquipmentDetailsList;
     @OneToMany(mappedBy = "staff")
     private List<VehicleEntity> vehicleList;
+    @ManyToMany(mappedBy = "staffList")
+    private List<FieldEntity> fieldList;
 }
