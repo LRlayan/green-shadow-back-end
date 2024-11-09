@@ -1,18 +1,17 @@
 package com.example.demo.dto.impl;
 
+import com.example.demo.dto.CropStatus;
 import com.example.demo.dto.SuperDTO;
-import com.example.demo.entity.SuperEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class CropDTO implements SuperDTO {
+public class CropDTO implements SuperDTO,CropStatus {
     @Id
     private String cropCode;
     private String cropName;

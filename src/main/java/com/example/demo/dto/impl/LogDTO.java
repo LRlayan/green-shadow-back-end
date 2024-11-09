@@ -1,5 +1,6 @@
 package com.example.demo.dto.impl;
 
+import com.example.demo.dto.LogStatus;
 import com.example.demo.dto.SuperDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -11,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class LogDTO implements SuperDTO {
+public class LogDTO implements SuperDTO , LogStatus {
     @Id
     private String logCode;
     private String date;

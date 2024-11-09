@@ -1,5 +1,6 @@
 package com.example.demo.dto.impl;
 
+import com.example.demo.dto.StaffStatus;
 import com.example.demo.dto.SuperDTO;
 import com.example.demo.entity.Role;
 import jakarta.persistence.*;
@@ -13,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class StaffDTO implements SuperDTO {
+public class StaffDTO implements SuperDTO , StaffStatus {
     @Id
     private String memberCode;
     private String firstName;

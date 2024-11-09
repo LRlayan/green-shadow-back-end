@@ -1,5 +1,6 @@
 package com.example.demo.dto.impl;
 
+import com.example.demo.dto.EquipmentStatus;
 import com.example.demo.dto.SuperDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -11,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class EquipmentDTO implements SuperDTO {
+public class EquipmentDTO implements SuperDTO, EquipmentStatus {
     @Id
     private String equipmentCode;
     private String Name;

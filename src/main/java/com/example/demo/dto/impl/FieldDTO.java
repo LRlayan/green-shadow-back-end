@@ -1,5 +1,6 @@
 package com.example.demo.dto.impl;
 
+import com.example.demo.dto.FieldStatus;
 import com.example.demo.dto.SuperDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -11,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class FieldDTO implements SuperDTO {
+public class FieldDTO implements SuperDTO, FieldStatus {
     @Id
     private String fieldCode;
     private String name;
