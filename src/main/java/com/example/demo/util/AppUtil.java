@@ -3,7 +3,6 @@ package com.example.demo.util;
 import java.util.Base64;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
 public class AppUtil {
     private static final Set<Integer> generatedNumbers = new HashSet<>();
