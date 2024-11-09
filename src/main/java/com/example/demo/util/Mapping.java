@@ -49,4 +49,16 @@ public class Mapping {
     public List<EquipmentDTO> equipmentList(List<EquipmentDTO> equipmentDTO){
         return modelMapper.map(equipmentDTO,new TypeToken<List<EquipmentDTO>>(){}.getType());
     }
+
+    public FieldEntity toFieldEntity(FieldDTO fieldDTO){
+        return modelMapper.map(fieldDTO,FieldEntity.class);
+    }
+
+    public FieldDTO toFieldDTO(FieldEntity fieldEntity){
+        return modelMapper.map(fieldEntity,FieldDTO.class);
+    }
+
+    public List<FieldDTO> fieldList(List<FieldDTO> fieldDTOS){
+        return modelMapper.map(fieldDTOS,new TypeToken<List<FieldDTO>>(){}.getType());
+    }
 }
