@@ -19,8 +19,13 @@ public class EquipmentEntity {
     private String type;
     private String status;
     private String availableCount;
-    @OneToMany(mappedBy = "staffEntity",cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @OneToMany(mappedBy = "equipmentEntity",cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<StaffEquipmentDetails> staffEquipmentDetailsList;
     @ManyToMany
+    @JoinTable(
+            name = "equipment_field_details",
+            joinColumns = @JoinColumn(name = "equipmentCode"),
+            inverseJoinColumns = @JoinColumn(name = "fieldCode")
+    )
     private List<FieldEntity> fieldList;
 }
