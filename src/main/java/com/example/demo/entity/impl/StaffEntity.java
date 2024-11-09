@@ -34,7 +34,7 @@ public class StaffEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
     @OneToMany(mappedBy = "staffEntity",cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    private List<StaffEquipmentDetails> staffEquipmentDetailsList;
+    private List<StaffEquipmentDetailsEntity> staffEquipmentDetailsList;
     @OneToMany(mappedBy = "staff" ,cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<VehicleEntity> vehicleList;
     @ManyToMany(mappedBy = "staffList" ,cascade = {CascadeType.MERGE, CascadeType.PERSIST})
