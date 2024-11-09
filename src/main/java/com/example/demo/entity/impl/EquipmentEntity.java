@@ -21,4 +21,6 @@ public class EquipmentEntity {
     private String availableCount;
     @OneToMany(mappedBy = "staffEntity",cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<StaffEquipmentDetails> staffEquipmentDetailsList;
+    @ManyToMany
+    private List<FieldEntity> fieldList;
 }
