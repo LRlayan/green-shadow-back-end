@@ -1,11 +1,11 @@
 package com.example.demo.entity.impl;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,4 +18,11 @@ public class LogEntity {
     private String date;
     private String logDetails;
     private String observedImage;
+    @ManyToMany
+    @JoinTable(
+            name = "staff_log_details",
+            joinColumns = @JoinColumn(name = "logCode"),
+            inverseJoinColumns = @JoinColumn(name = "memberCode")
+    )
+    private List<StaffEntity> staffList;
 }

@@ -37,4 +37,6 @@ public class StaffEntity {
     private List<VehicleEntity> vehicleList;
     @ManyToMany(mappedBy = "staffList")
     private List<FieldEntity> fieldList;
+    @ManyToMany(mappedBy = "staffList")
+    private List<LogEntity> logList;
 }
