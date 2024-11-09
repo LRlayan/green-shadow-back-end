@@ -29,4 +29,11 @@ public class FieldEntity {
             inverseJoinColumns = @JoinColumn(name = "memberCode")
     )
     private List<StaffEntity> staffList;
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinTable(
+            name = "field_log_details",
+            joinColumns = @JoinColumn(name = "fieldCode"),
+            inverseJoinColumns = @JoinColumn(name = "logCode")
+    )
+    private List<StaffEntity> logList;
 }
