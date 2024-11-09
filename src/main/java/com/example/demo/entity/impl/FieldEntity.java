@@ -35,5 +35,12 @@ public class FieldEntity {
             joinColumns = @JoinColumn(name = "fieldCode"),
             inverseJoinColumns = @JoinColumn(name = "logCode")
     )
-    private List<StaffEntity> logList;
+    private List<LogEntity> logList;
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinTable(
+            name = "field_crop_details",
+            joinColumns = @JoinColumn(name = "fieldCode"),
+            inverseJoinColumns = @JoinColumn(name = "cropCode")
+    )
+    private List<CropEntity> cropList;
 }

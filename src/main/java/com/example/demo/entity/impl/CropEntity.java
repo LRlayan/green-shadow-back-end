@@ -23,4 +23,6 @@ public class CropEntity implements SuperEntity {
     private String cropImage;
     @ManyToMany(mappedBy = "cropList",cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<LogEntity> logList;
+    @ManyToMany(mappedBy = "cropList",cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<FieldEntity> fieldList;
 }
