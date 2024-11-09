@@ -18,7 +18,7 @@ public class LogEntity {
     private String date;
     private String logDetails;
     private String observedImage;
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(
             name = "staff_log_details",
             joinColumns = @JoinColumn(name = "logCode"),

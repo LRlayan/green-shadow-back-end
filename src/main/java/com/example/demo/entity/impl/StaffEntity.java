@@ -33,10 +33,10 @@ public class StaffEntity {
     private Role role;
     @OneToMany(mappedBy = "staffEntity",cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<StaffEquipmentDetails> staffEquipmentDetailsList;
-    @OneToMany(mappedBy = "staff")
+    @OneToMany(mappedBy = "staff" ,cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<VehicleEntity> vehicleList;
-    @ManyToMany(mappedBy = "staffList")
+    @ManyToMany(mappedBy = "staffList" ,cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<FieldEntity> fieldList;
-    @ManyToMany(mappedBy = "staffList")
+    @ManyToMany(mappedBy = "staffList" ,cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<LogEntity> logList;
 }

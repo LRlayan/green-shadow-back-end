@@ -20,9 +20,9 @@ public class FieldEntity {
     private String extentSize;
     private String fieldImage1;
     private String fieldImage2;
-    @ManyToMany(mappedBy = "fieldList")
+    @ManyToMany(mappedBy = "fieldList",cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<EquipmentEntity> equipmentsList;
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(
             name = "field_staff_details",
             joinColumns = @JoinColumn(name = "fieldCode"),
