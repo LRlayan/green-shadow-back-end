@@ -17,6 +17,10 @@ public class AppUtil {
         return "FIELD-" + (int)(Math.random() * 1000) + 1;
     }
 
+    public static String generateLogCode(){
+        return "LOG-" + (int)(Math.random() * 1000) + 1;
+    }
+
     public static String imageBase64(byte[] image){
         return Base64.getEncoder().encodeToString(image);
     }
