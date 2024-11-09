@@ -21,6 +21,10 @@ public class AppUtil {
         return "LOG-" + (int)(Math.random() * 1000) + 1;
     }
 
+    public static String generateStaffEquDetailsCode(){
+        return "STEQU-" + Math.random() + 1;
+    }
+
     public static String imageBase64(byte[] image){
         return Base64.getEncoder().encodeToString(image);
     }
