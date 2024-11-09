@@ -85,4 +85,16 @@ public class Mapping {
     public List<StaffDTO> staffList(List<StaffDTO> staffDTO){
         return modelMapper.map(staffDTO,new TypeToken<List<StaffDTO>>(){}.getType());
     }
+
+    public VehicleEntity toVehicleEntity(VehicleDTO vehicleDTO){
+        return modelMapper.map(vehicleDTO,VehicleEntity.class);
+    }
+
+    public VehicleDTO toVehicleDTO(VehicleEntity vehicleEntity){
+        return modelMapper.map(vehicleEntity,VehicleDTO.class);
+    }
+
+    public List<VehicleDTO> vehicleList(List<VehicleDTO> vehicleDTO){
+        return modelMapper.map(vehicleDTO,new TypeToken<List<VehicleDTO>>(){}.getType());
+    }
 }
