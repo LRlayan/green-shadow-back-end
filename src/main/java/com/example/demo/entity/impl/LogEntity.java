@@ -32,6 +32,6 @@ public class LogEntity {
             inverseJoinColumns = @JoinColumn(name = "cropCode")
     )
     private List<CropEntity> cropList;
-    @ManyToMany(mappedBy = "fieldList",cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    private List<LogEntity> logList;
+    @ManyToMany(mappedBy = "logList",cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<FieldEntity> fieldList;
 }
