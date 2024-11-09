@@ -25,6 +25,10 @@ public class AppUtil {
         return "STEQU-" + Math.random() + 1;
     }
 
+    public static String generateStaffCode(){
+        return "STAFF-" + (int)(Math.random() * 1000) + 1;
+    }
+
     public static String imageBase64(byte[] image){
         return Base64.getEncoder().encodeToString(image);
     }
