@@ -33,4 +33,6 @@ public class StaffEntity {
     private Role role;
     @OneToMany(mappedBy = "staffEntity",cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<StaffEquipmentDetails> staffEquipmentDetailsList;
+    @OneToMany(mappedBy = "staff")
+    private List<VehicleEntity> vehicleList;
 }

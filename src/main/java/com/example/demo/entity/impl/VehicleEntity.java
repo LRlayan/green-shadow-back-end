@@ -1,8 +1,6 @@
 package com.example.demo.entity.impl;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,4 +18,7 @@ public class VehicleEntity {
     private String category;
     private String fuelType;
     private String remark;
+    @ManyToOne
+    @JoinColumn(name = "memberCode")
+    private StaffEntity staff;
 }
