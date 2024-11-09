@@ -13,6 +13,10 @@ public class AppUtil {
         return "EQU-" + (int)(Math.random() * 1000) + 1;
     }
 
+    public static String generateFieldCode(){
+        return "FIELD-" + (int)(Math.random() * 1000) + 1;
+    }
+
     public static String imageBase64(byte[] image){
         return Base64.getEncoder().encodeToString(image);
     }
