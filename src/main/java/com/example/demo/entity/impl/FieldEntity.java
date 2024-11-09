@@ -1,9 +1,6 @@
 package com.example.demo.entity.impl;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,6 +20,6 @@ public class FieldEntity {
     private String extentSize;
     private String fieldImage1;
     private String fieldImage2;
-    @ManyToMany
-    private List<EquipmentEntity> equipmentList;
+    @ManyToMany(mappedBy = "fieldList")
+    private List<EquipmentEntity> equipmentsList;
 }
