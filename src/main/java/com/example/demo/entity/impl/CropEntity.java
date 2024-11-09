@@ -20,6 +20,7 @@ public class CropEntity implements SuperEntity {
     private String scientificName;
     private String category;
     private String season;
+    @Column(columnDefinition = "LONGTEXT")
     private String cropImage;
     @ManyToMany(mappedBy = "cropList",cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<LogEntity> logList;

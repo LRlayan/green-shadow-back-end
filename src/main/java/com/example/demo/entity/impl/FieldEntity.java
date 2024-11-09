@@ -18,7 +18,9 @@ public class FieldEntity {
     private String name;
     private String location;
     private String extentSize;
+    @Column(columnDefinition = "LONGTEXT")
     private String fieldImage1;
+    @Column(columnDefinition = "LONGTEXT")
     private String fieldImage2;
     @ManyToMany(mappedBy = "fieldList",cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<EquipmentEntity> equipmentsList;

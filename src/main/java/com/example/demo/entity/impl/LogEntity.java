@@ -17,6 +17,7 @@ public class LogEntity {
     private String logCode;
     private String date;
     private String logDetails;
+    @Column(columnDefinition = "LONGTEXT")
     private String observedImage;
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(
