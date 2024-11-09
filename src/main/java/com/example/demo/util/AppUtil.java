@@ -29,6 +29,10 @@ public class AppUtil {
         return "STAFF-" + (int)(Math.random() * 1000) + 1;
     }
 
+    public static String generateVehicleCode(){
+        return "VEHICLE-" + (int)(Math.random() * 1000) + 1;
+    }
+
     public static String imageBase64(byte[] image){
         return Base64.getEncoder().encodeToString(image);
     }
