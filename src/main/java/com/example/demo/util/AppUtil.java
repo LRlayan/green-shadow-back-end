@@ -1,40 +1,30 @@
 package com.example.demo.util;
 
 import java.util.Base64;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 public class AppUtil {
+    private static final Set<Integer> generatedNumbers = new HashSet<>();
+    private static int minRange = 1;
+    private static int maxRange = 1000;
 
-    public static String generateCropCode(){
-        return "CROP-" + (int)(Math.random() * 1000) + 1;
-    }
+    public static String generateCode(String prefix) {
+        int randomNumber;
 
-    public static String generateEquipmentCode(){
-        return "EQU-" + (int)(Math.random() * 1000) + 1;
-    }
+        do {
+            randomNumber = (int) (Math.random() * (maxRange - minRange + 1)) + minRange;
+        } while (generatedNumbers.contains(randomNumber));
 
-    public static String generateFieldCode(){
-        return "FIELD-" + (int)(Math.random() * 1000) + 1;
-    }
+        generatedNumbers.add(randomNumber);
 
-    public static String generateLogCode(){
-        return "LOG-" + (int)(Math.random() * 1000) + 1;
-    }
-
-    public static String generateStaffEquDetailsCode(){
-        return "STEQU-" + Math.random() + 1;
-    }
-
-    public static String generateStaffCode(){
-        return "STAFF-" + (int)(Math.random() * 1000) + 1;
-    }
-
-    public static String generateVehicleCode(){
-        return "VEHICLE-" + (int)(Math.random() * 1000) + 1;
-    }
-
-    public static String generateUserCode(){
-        return "USER-" + (int)(Math.random() * 1000) + 1;
+        if (generatedNumbers.size() >= (maxRange - minRange + 1)) {
+            generatedNumbers.clear();
+            minRange = 1000;
+            maxRange = 10000;
+        }
+        return prefix + randomNumber;
     }
 
     public static String imageBase64(byte[] image){
