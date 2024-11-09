@@ -29,7 +29,9 @@ public class StaffEntity {
     private String addressLine4;
     private String addressLine5;
     private String contactNo;
+    @Column(unique = true)
     private String email;
+    @Enumerated(EnumType.STRING)
     private Role role;
     @OneToMany(mappedBy = "staffEntity",cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<StaffEquipmentDetails> staffEquipmentDetailsList;
