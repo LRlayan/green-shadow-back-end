@@ -1,11 +1,11 @@
 package com.example.demo.entity.impl;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,4 +19,6 @@ public class EquipmentEntity {
     private String type;
     private String status;
     private String availableCount;
+    @OneToMany(mappedBy = "staffEntity",cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<StaffEquipmentDetails> staffEquipmentDetailsList;
 }

@@ -1,14 +1,13 @@
 package com.example.demo.entity.impl;
 
 import com.example.demo.entity.Role;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -32,4 +31,6 @@ public class StaffEntity {
     private String contactNo;
     private String email;
     private Role role;
+    @OneToMany(mappedBy = "equipmentEntity",cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<StaffEquipmentDetails> staffEquipmentDetailsList;
 }

@@ -1,8 +1,6 @@
 package com.example.demo.entity.impl;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,4 +14,10 @@ public class StaffEquipmentDetails {
     @Id
     private String id;
     private int useEquipmentCount;
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "memberCode",referencedColumnName = "memberCode",nullable = false)
+    private StaffEntity staffEntity;
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "equipmentCode",referencedColumnName = "equipmentCode",nullable = false)
+    private EquipmentEntity equipmentEntity;
 }
