@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.awt.*;
 import java.util.List;
 
 @AllArgsConstructor
@@ -16,8 +17,8 @@ public class FieldEntity {
     @Id
     private String fieldCode;
     private String name;
-    private String location;
-    private String extentSize;
+    private Point location;
+    private double extentSize;
     @Column(columnDefinition = "LONGTEXT")
     private String fieldImage1;
     @Column(columnDefinition = "LONGTEXT")

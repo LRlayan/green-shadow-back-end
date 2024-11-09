@@ -1,5 +1,6 @@
 package com.example.demo.entity.impl;
 
+import com.example.demo.entity.Gender;
 import com.example.demo.entity.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -21,7 +22,8 @@ public class StaffEntity {
     private String lastName;
     private LocalDate joinedDate;
     private LocalDate dateOfBirth;
-    private String gender;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
     private String designation;
     private String addressLine1;
     private String addressLine2;

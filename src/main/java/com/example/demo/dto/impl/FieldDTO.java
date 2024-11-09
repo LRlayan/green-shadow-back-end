@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.awt.*;
 import java.util.List;
 
 @AllArgsConstructor
@@ -16,8 +17,8 @@ public class FieldDTO implements SuperDTO, FieldStatus {
     @Id
     private String fieldCode;
     private String name;
-    private String location;
-    private String extentSize;
+    private Point location;
+    private double extentSize;
     private String fieldImage1;
     private String fieldImage2;
     private List<EquipmentDTO> equipmentsList;
