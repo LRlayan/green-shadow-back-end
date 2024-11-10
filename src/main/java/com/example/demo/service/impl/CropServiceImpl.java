@@ -32,8 +32,7 @@ public class CropServiceImpl implements CropService {
 
     @Override
     public List<CropDTO> getAllCrop() {
-        List<CropEntity> getAllCrops = cropDAO.findAll();
-        return mapping.cropList(getAllCrops);
+        return mapping.cropList(cropDAO.findAll());
     }
 
     @Override
