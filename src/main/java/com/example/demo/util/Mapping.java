@@ -58,7 +58,7 @@ public class Mapping {
         return modelMapper.map(fieldEntity,FieldDTO.class);
     }
 
-    public List<FieldDTO> fieldList(List<FieldDTO> fieldDTOS){
+    public List<FieldDTO> fieldList(List<FieldEntity> fieldDTOS){
         return modelMapper.map(fieldDTOS,new TypeToken<List<FieldDTO>>(){}.getType());
     }
 
