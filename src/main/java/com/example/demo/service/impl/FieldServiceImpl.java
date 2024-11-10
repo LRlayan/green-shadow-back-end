@@ -31,7 +31,7 @@ public class FieldServiceImpl implements FieldService {
 
     @Override
     public List<FieldDTO> getAllField() {
-        return null;
+        return mapping.fieldList(fieldDAO.findAll());
     }
 
     @Override

@@ -62,7 +62,7 @@ public class FieldController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<FieldDTO> getAllField(){
-        return null;
+        return fieldService.getAllField();
     }
 
     @DeleteMapping(value = "/{fieldId}")
