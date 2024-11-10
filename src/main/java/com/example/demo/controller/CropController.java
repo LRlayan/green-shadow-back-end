@@ -59,7 +59,7 @@ public class CropController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<CropDTO> getAllCrop(){
-        return null;
+        return cropService.getAllCrop();
     }
 
     @DeleteMapping(value = "/{cropId}")
