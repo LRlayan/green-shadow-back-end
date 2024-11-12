@@ -10,9 +10,11 @@ import com.example.demo.exception.DataPersistException;
 import com.example.demo.service.FieldService;
 import com.example.demo.util.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.geo.Point;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.*;
 import java.util.List;
 
 @Service
@@ -31,16 +33,26 @@ public class FieldServiceImpl implements FieldService {
             number = Integer.parseInt(parts[1]);
         }
         fieldDTO.setFieldCode("FIELD-" + ++number);
-        FieldEntity saveField = fieldDAO.save(mapping.toFieldEntity(fieldDTO));
+
+        FieldEntity fieldEntity = mapping.toFieldEntity(fieldDTO);
+        fieldEntity.setLocation(location(fieldDTO.getLocation()));
+        FieldEntity saveField = fieldDAO.save(fieldEntity);
         if (saveField == null){
             throw new DataPersistException("Field is not saved.");
         }
     }
 
     @Override
-    public List<FieldDTO> getAllField() {
-        return mapping.fieldList(fieldDAO.findAll());
-//        return mapping.fieldList(fieldDAO.findAllWithCrops());
+    public List<FieldDTO> getAllField() throws IOException, ClassNotFoundException {
+        List<FieldDTO> fieldDTO = mapping.fieldList(fieldDAO.findAll());
+        List<FieldEntity> fieldEntity = fieldDAO.findAll();
+        for(FieldEntity fieldEntity1 :fieldEntity){
+            String location = convertPointToLocation(fieldEntity1.getLocation());
+            for (FieldDTO fieldDTO1:fieldDTO){
+                fieldDTO1.setLocation(location);
+            }
+        }
+        return fieldDTO;
     }
 
     @Override
@@ -60,5 +72,19 @@ public class FieldServiceImpl implements FieldService {
         }else {
             return new SelectedErrorStatus(2,"Field with Code "+fieldId+" not found");
         }
+    }
+
+    public String convertPointToLocation(Point point) {
+        if (point != null) {
+            return point.getX() + "," + point.getY(); // Format as "longitude,latitude"
+        }
+        return "";
+    }
+
+    private Point location(String location){
+        String[] locationParts = location.split(",");
+        double longitude = Double.parseDouble(locationParts[0].trim());
+        double latitude = Double.parseDouble(locationParts[1].trim());
+        return new Point(longitude, latitude);
     }
 }
