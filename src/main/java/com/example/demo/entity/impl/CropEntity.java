@@ -1,16 +1,16 @@
 package com.example.demo.entity.impl;
 
 import com.example.demo.entity.SuperEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "crop")
 public class CropEntity implements SuperEntity {
@@ -22,8 +22,10 @@ public class CropEntity implements SuperEntity {
     private String season;
     @Column(columnDefinition = "LONGTEXT")
     private String cropImage;
-    @ManyToMany(mappedBy = "cropList",cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JsonIgnore// Ignore during serialization to avoid recursion
+    @ManyToMany(mappedBy = "cropList")
     private List<LogEntity> logList;
-    @ManyToMany(mappedBy = "cropList",cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JsonIgnore
+    @ManyToMany(mappedBy = "cropList")
     private List<FieldEntity> fieldList;
 }
