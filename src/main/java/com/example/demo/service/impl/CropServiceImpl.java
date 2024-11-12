@@ -23,8 +23,14 @@ public class CropServiceImpl implements CropService {
 
     @Override
     public void saveCrop(CropDTO cropDTO) {
+        int number = 0;
+        CropEntity crop = cropDAO.findLastRowNative();
+        if (crop != null){
+            String[] parts = crop.getCropCode().split("-");
+            number = Integer.parseInt(parts[1]);
+        }
+        cropDTO.setCropCode("CROP-" + ++number);
         CropEntity saveCrop = cropDAO.save(mapping.toCropEntity(cropDTO));
-
         if (saveCrop == null){
             throw new DataPersistException("Crop is not saved.");
         }
