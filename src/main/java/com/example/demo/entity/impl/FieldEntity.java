@@ -1,16 +1,16 @@
 package com.example.demo.entity.impl;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.data.geo.Point;
 
-import java.awt.*;
 import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "field")
 public class FieldEntity {
@@ -23,23 +23,27 @@ public class FieldEntity {
     private String fieldImage1;
     @Column(columnDefinition = "LONGTEXT")
     private String fieldImage2;
-    @ManyToMany(mappedBy = "fieldList",cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JsonIgnore  // Ignore during serialization to avoid recursion
+    @ManyToMany(mappedBy = "fieldList")
     private List<EquipmentEntity> equipmentsList;
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JsonIgnore
+    @ManyToMany
     @JoinTable(
             name = "field_staff_details",
             joinColumns = @JoinColumn(name = "fieldCode"),
             inverseJoinColumns = @JoinColumn(name = "memberCode")
     )
     private List<StaffEntity> staffList;
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JsonIgnore
+    @ManyToMany
     @JoinTable(
             name = "field_log_details",
             joinColumns = @JoinColumn(name = "fieldCode"),
             inverseJoinColumns = @JoinColumn(name = "logCode")
     )
     private List<LogEntity> logList;
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "field_crop_details",
             joinColumns = @JoinColumn(name = "fieldCode"),
