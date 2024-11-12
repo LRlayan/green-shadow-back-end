@@ -38,7 +38,7 @@ public class FieldController {
         try {
             var fieldDTO = new FieldDTO();
             fieldDTO.setName(fieldName);
-            fieldDTO.setLocation(location(location));
+            fieldDTO.setLocation(location);
             fieldDTO.setExtentSize(Double.parseDouble(extentSize));
             fieldDTO.setFieldImage1(AppUtil.imageBase64(fieldImage1.getBytes()));
             fieldDTO.setFieldImage2(AppUtil.imageBase64(fieldImage2.getBytes()));
@@ -78,12 +78,5 @@ public class FieldController {
     @PutMapping(value = "/{fieldId}")
     public void updateField(@PathVariable("fieldId") String fieldId) throws IOException {
 
-    }
-
-    private Point location(String location){
-        String[] locationParts = location.split(",");
-        double longitude = Double.parseDouble(locationParts[0].trim());
-        double latitude = Double.parseDouble(locationParts[1].trim());
-        return new Point(longitude, latitude);
     }
 }
