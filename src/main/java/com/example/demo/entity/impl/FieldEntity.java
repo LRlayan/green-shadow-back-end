@@ -42,7 +42,6 @@ public class FieldEntity {
             inverseJoinColumns = @JoinColumn(name = "logCode")
     )
     private List<LogEntity> logList;
-    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "field_crop_details",

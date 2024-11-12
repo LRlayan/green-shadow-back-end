@@ -28,6 +28,5 @@ public class FieldDTO implements SuperDTO, FieldStatus {
     private List<StaffDTO> staffList;
     @JsonIgnore
     private List<LogDTO> logList;
-    @JsonIgnore
     private List<CropDTO> cropList;
 }
