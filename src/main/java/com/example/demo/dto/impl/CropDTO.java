@@ -2,6 +2,7 @@ package com.example.demo.dto.impl;
 
 import com.example.demo.dto.CropStatus;
 import com.example.demo.dto.SuperDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,6 +20,8 @@ public class CropDTO implements SuperDTO,CropStatus {
     private String category;
     private String season;
     private String cropImage;
+    @JsonIgnore
     private List<LogDTO> logList;
+    @JsonIgnore
     private List<FieldDTO> fieldList;
 }
