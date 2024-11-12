@@ -1,9 +1,12 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.dao.CropDAO;
+import com.example.demo.dao.FieldDAO;
 import com.example.demo.dto.CropStatus;
 import com.example.demo.dto.impl.CropDTO;
+import com.example.demo.dto.impl.FieldDTO;
 import com.example.demo.entity.impl.CropEntity;
+import com.example.demo.entity.impl.FieldEntity;
 import com.example.demo.exception.DataPersistException;
 import com.example.demo.service.CropService;
 import com.example.demo.util.Mapping;
@@ -11,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,6 +22,8 @@ import java.util.List;
 public class CropServiceImpl implements CropService {
     @Autowired
     private CropDAO cropDAO;
+    @Autowired
+    private FieldDAO fieldDAO;
     @Autowired
     private Mapping mapping;
 
@@ -30,8 +36,19 @@ public class CropServiceImpl implements CropService {
             number = Integer.parseInt(parts[1]);
         }
         cropDTO.setCropCode("CROP-" + ++number);
-        CropEntity saveCrop = cropDAO.save(mapping.toCropEntity(cropDTO));
-        if (saveCrop == null){
+        CropEntity cropEntity = mapping.toCropEntity(cropDTO);
+        List<FieldEntity> fieldEntities = new ArrayList<>();
+        for (FieldDTO fieldDTO : cropDTO.getFieldList()){
+            if (fieldDAO.existsById(fieldDTO.getFieldCode())){
+                fieldEntities.add(fieldDAO.getReferenceById(fieldDTO.getFieldCode()));
+            }
+        }
+        cropEntity.setFieldList(fieldEntities);
+        for (FieldEntity fieldEntity : fieldEntities){
+            fieldEntity.getCropList().add(cropEntity);
+        }
+        cropDAO.save(cropEntity);
+        if (cropEntity == null){
             throw new DataPersistException("Crop is not saved.");
         }
     }
