@@ -2,6 +2,7 @@ package com.example.demo.dto.impl;
 
 import com.example.demo.dto.FieldStatus;
 import com.example.demo.dto.SuperDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,8 +22,12 @@ public class FieldDTO implements SuperDTO, FieldStatus {
     private double extentSize;
     private String fieldImage1;
     private String fieldImage2;
+    @JsonIgnore
     private List<EquipmentDTO> equipmentsList;
+    @JsonIgnore
     private List<StaffDTO> staffList;
+    @JsonIgnore
     private List<LogDTO> logList;
+    @JsonIgnore
     private List<CropDTO> cropList;
 }
