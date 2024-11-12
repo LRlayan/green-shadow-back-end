@@ -3,7 +3,6 @@ package com.example.demo.controller;
 import com.example.demo.dto.FieldStatus;
 import com.example.demo.dto.impl.CropDTO;
 import com.example.demo.dto.impl.FieldDTO;
-import com.example.demo.dto.impl.StaffDTO;
 import com.example.demo.exception.DataPersistException;
 import com.example.demo.service.FieldService;
 import com.example.demo.util.AppUtil;
@@ -16,10 +15,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/fields")
+@CrossOrigin
 public class FieldController {
     @Autowired
     private FieldService fieldService;
@@ -28,21 +29,20 @@ public class FieldController {
     public ResponseEntity<Void> saveField(
             @RequestPart("name") String fieldName,
             @RequestPart("location") String location,
-            @RequestPart("extentSize") double extentSize,
+            @RequestPart("extentSize") String extentSize,
             @RequestPart("fieldImage1") MultipartFile fieldImage1,
             @RequestPart("fieldImage2") MultipartFile fieldImage2,
-            @RequestPart("staffList") List<StaffDTO> staffList,
+//            @RequestPart("staffList") List<StaffDTO> staffList,
             @RequestPart("cropList") List<CropDTO> cropList
     ) {
         try {
             var fieldDTO = new FieldDTO();
-            fieldDTO.setFieldCode(AppUtil.generateCode("FIELD-"));
             fieldDTO.setName(fieldName);
             fieldDTO.setLocation(location(location));
-            fieldDTO.setExtentSize(extentSize);
+            fieldDTO.setExtentSize(Double.parseDouble(extentSize));
             fieldDTO.setFieldImage1(AppUtil.imageBase64(fieldImage1.getBytes()));
             fieldDTO.setFieldImage2(AppUtil.imageBase64(fieldImage2.getBytes()));
-            fieldDTO.setStaffList(staffList);
+//            fieldDTO.setStaffList(staffList);
             fieldDTO.setCropList(cropList);
             fieldService.saveField(fieldDTO);
             return new ResponseEntity<>(HttpStatus.CREATED);
@@ -57,12 +57,17 @@ public class FieldController {
 
     @GetMapping(value = "/{fieldId}",produces = MediaType.APPLICATION_JSON_VALUE)
     public FieldStatus getSelectedField(@PathVariable("fieldId") String fieldId){
-        return null;
+        return fieldService.getSelectedField(fieldId);
     }
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping
     public List<FieldDTO> getAllField(){
-        return fieldService.getAllField();
+        try {
+            return fieldService.getAllField();
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
     }
 
     @DeleteMapping(value = "/{fieldId}")
