@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.customStatusCode.SelectedErrorStatus;
 import com.example.demo.dao.FieldDAO;
 import com.example.demo.dto.FieldStatus;
 import com.example.demo.dto.impl.CropDTO;
@@ -23,6 +24,13 @@ public class FieldServiceImpl implements FieldService {
     private Mapping mapping;
     @Override
     public void saveField(FieldDTO fieldDTO) {
+        int number = 0;
+        FieldEntity field = fieldDAO.findLastRowNative();
+        if (field != null){
+            String[] parts = field.getFieldCode().split("-");
+            number = Integer.parseInt(parts[1]);
+        }
+        fieldDTO.setFieldCode("FIELD-" + ++number);
         FieldEntity saveField = fieldDAO.save(mapping.toFieldEntity(fieldDTO));
         if (saveField == null){
             throw new DataPersistException("Field is not saved.");
@@ -32,6 +40,7 @@ public class FieldServiceImpl implements FieldService {
     @Override
     public List<FieldDTO> getAllField() {
         return mapping.fieldList(fieldDAO.findAll());
+//        return mapping.fieldList(fieldDAO.findAllWithCrops());
     }
 
     @Override
@@ -46,6 +55,10 @@ public class FieldServiceImpl implements FieldService {
 
     @Override
     public FieldStatus getSelectedField(String fieldId) {
-        return null;
+        if (fieldDAO.existsById(fieldId)){
+            return mapping.toFieldDTO(fieldDAO.getReferenceById(fieldId));
+        }else {
+            return new SelectedErrorStatus(2,"Field with Code "+fieldId+" not found");
+        }
     }
 }
