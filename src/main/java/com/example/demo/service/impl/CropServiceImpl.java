@@ -63,8 +63,8 @@ public class CropServiceImpl implements CropService {
             List<FieldDTO> fieldCodes = new ArrayList<>();
             List<LogDTO> logCodes = new ArrayList<>();
             for (FieldEntity field : cropEntity.getFieldList()){
-                String locations = field.getLocation().getX() + "," + field.getLocation().getY();
-                fieldCodes.add(new FieldDTO(field.getFieldCode(),field.getName(),locations,field.getExtentSize(),field.getFieldImage1(),field.getFieldImage2(),new ArrayList<>(),new ArrayList<>(),new ArrayList<>(),new ArrayList<>()));
+//                String locations = field.getLocation().getX() + "," + field.getLocation().getY();
+                fieldCodes.add(new FieldDTO(field.getFieldCode(),field.getName(),field.getLocation(),field.getExtentSize(),field.getFieldImage1(),field.getFieldImage2(),new ArrayList<>(),new ArrayList<>(),new ArrayList<>(),new ArrayList<>()));
             }
             for (LogEntity logEntity : cropEntity.getLogList()){
                 logCodes.add(mapping.toLogDTO(logEntity));

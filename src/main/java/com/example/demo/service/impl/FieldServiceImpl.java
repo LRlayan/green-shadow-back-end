@@ -35,7 +35,7 @@ public class FieldServiceImpl implements FieldService {
         fieldDTO.setFieldCode("FIELD-" + ++number);
 
         FieldEntity fieldEntity = mapping.toFieldEntity(fieldDTO);
-        fieldEntity.setLocation(location(fieldDTO.getLocation()));
+        fieldEntity.setLocation(fieldDTO.getLocation());
         FieldEntity saveField = fieldDAO.save(fieldEntity);
         if (saveField == null){
             throw new DataPersistException("Field is not saved.");
@@ -54,7 +54,7 @@ public class FieldServiceImpl implements FieldService {
             for (CropEntity cropEntity : fieldEntity.getCropList()){
                 cropDTOS.add(new CropDTO(cropEntity.getCropCode(),cropEntity.getCropName(),cropEntity.getScientificName(),cropEntity.getCategory(),cropEntity.getSeason(),cropEntity.getCropImage(),new ArrayList<>(),new ArrayList<>()));
             }
-            fieldDTOS.add(new FieldDTO(fieldEntity.getFieldCode(), fieldEntity.getName(), convertPointToLocation(fieldEntity.getLocation()), fieldEntity.getExtentSize(), fieldEntity.getFieldImage1(),fieldEntity.getFieldImage2(),equipmentDTOS,staffDTOS,logDTOS,cropDTOS));
+            fieldDTOS.add(new FieldDTO(fieldEntity.getFieldCode(), fieldEntity.getName(), fieldEntity.getLocation(), fieldEntity.getExtentSize(), fieldEntity.getFieldImage1(),fieldEntity.getFieldImage2(),equipmentDTOS,staffDTOS,logDTOS,cropDTOS));
         }
         return fieldDTOS;
     }
