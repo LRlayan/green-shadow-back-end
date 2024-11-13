@@ -4,21 +4,20 @@ import com.example.demo.dto.FieldStatus;
 import com.example.demo.dto.SuperDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.geo.Point;
 
 import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 public class FieldDTO implements SuperDTO, FieldStatus {
     @Id
     private String fieldCode;
     private String name;
-    private Point location;
+    private String location;
     private double extentSize;
     private String fieldImage1;
     private String fieldImage2;
