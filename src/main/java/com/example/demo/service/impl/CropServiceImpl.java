@@ -5,8 +5,10 @@ import com.example.demo.dao.FieldDAO;
 import com.example.demo.dto.CropStatus;
 import com.example.demo.dto.impl.CropDTO;
 import com.example.demo.dto.impl.FieldDTO;
+import com.example.demo.dto.impl.LogDTO;
 import com.example.demo.entity.impl.CropEntity;
 import com.example.demo.entity.impl.FieldEntity;
+import com.example.demo.entity.impl.LogEntity;
 import com.example.demo.exception.DataPersistException;
 import com.example.demo.service.CropService;
 import com.example.demo.util.Mapping;
@@ -55,7 +57,21 @@ public class CropServiceImpl implements CropService {
 
     @Override
     public List<CropDTO> getAllCrop() {
-        return mapping.cropList(cropDAO.findAll());
+        List<CropDTO> list =  new ArrayList<>();
+        List<CropEntity> all = cropDAO.findAll();
+        for (CropEntity cropEntity : all){
+            List<FieldDTO> fieldCodes = new ArrayList<>();
+            List<LogDTO> logCodes = new ArrayList<>();
+            for (FieldEntity field : cropEntity.getFieldList()){
+                String locations = field.getLocation().getX() + "," + field.getLocation().getY();
+                fieldCodes.add(new FieldDTO(field.getFieldCode(),field.getName(),locations,field.getExtentSize(),field.getFieldImage1(),field.getFieldImage2(),new ArrayList<>(),new ArrayList<>(),new ArrayList<>(),new ArrayList<>()));
+            }
+            for (LogEntity logEntity : cropEntity.getLogList()){
+                logCodes.add(mapping.toLogDTO(logEntity));
+            }
+            list.add(new CropDTO(cropEntity.getCropCode(),cropEntity.getCropName(),cropEntity.getScientificName(),cropEntity.getCategory(),cropEntity.getSeason(),cropEntity.getCropImage(),logCodes,fieldCodes));
+        }
+        return list;
     }
 
     @Override
