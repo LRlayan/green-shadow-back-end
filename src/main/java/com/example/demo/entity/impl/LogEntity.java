@@ -1,15 +1,15 @@
 package com.example.demo.entity.impl;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "logs")
 public class LogEntity {
@@ -33,6 +33,7 @@ public class LogEntity {
             inverseJoinColumns = @JoinColumn(name = "cropCode")
     )
     private List<CropEntity> cropList;
+    @JsonIgnore
     @ManyToMany(mappedBy = "logList",cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<FieldEntity> fieldList;
 }
