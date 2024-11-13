@@ -34,7 +34,6 @@ public class CropController {
     ) {
         try{
             var cropDTO = new CropDTO();
-            cropDTO.setCropCode(AppUtil.generateCode("CROP-"));
             cropDTO.setCropName(cropName);
             cropDTO.setScientificName(scientificName);
             cropDTO.setCategory(category);
