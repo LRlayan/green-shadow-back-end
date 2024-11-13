@@ -4,14 +4,14 @@ import com.example.demo.dto.CropStatus;
 import com.example.demo.dto.SuperDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 public class CropDTO implements SuperDTO,CropStatus {
     @Id
     private String cropCode;
@@ -22,6 +22,5 @@ public class CropDTO implements SuperDTO,CropStatus {
     private String cropImage;
     @JsonIgnore
     private List<LogDTO> logList;
-    @JsonIgnore
     private List<FieldDTO> fieldList;
 }
