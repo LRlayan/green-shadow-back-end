@@ -3,9 +3,8 @@ package com.example.demo.service.impl;
 import com.example.demo.customStatusCode.SelectedErrorStatus;
 import com.example.demo.dao.FieldDAO;
 import com.example.demo.dto.FieldStatus;
-import com.example.demo.dto.impl.CropDTO;
-import com.example.demo.dto.impl.FieldDTO;
-import com.example.demo.entity.impl.FieldEntity;
+import com.example.demo.dto.impl.*;
+import com.example.demo.entity.impl.*;
 import com.example.demo.exception.DataPersistException;
 import com.example.demo.service.FieldService;
 import com.example.demo.util.Mapping;
@@ -15,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -44,15 +44,19 @@ public class FieldServiceImpl implements FieldService {
 
     @Override
     public List<FieldDTO> getAllField() throws IOException, ClassNotFoundException {
-        List<FieldDTO> fieldDTO = mapping.fieldList(fieldDAO.findAll());
-        List<FieldEntity> fieldEntity = fieldDAO.findAll();
-        for(FieldEntity fieldEntity1 :fieldEntity){
-            String location = convertPointToLocation(fieldEntity1.getLocation());
-            for (FieldDTO fieldDTO1:fieldDTO){
-                fieldDTO1.setLocation(location);
+        List<FieldDTO> fieldDTOS = new ArrayList<>();
+        for (FieldEntity fieldEntity : fieldDAO.findAll()){
+            List<EquipmentDTO> equipmentDTOS =  new ArrayList<>();
+            List<StaffDTO> staffDTOS =  new ArrayList<>();
+            List<LogDTO> logDTOS =  new ArrayList<>();
+            List<CropDTO> cropDTOS =  new ArrayList<>();
+
+            for (CropEntity cropEntity : fieldEntity.getCropList()){
+                cropDTOS.add(new CropDTO(cropEntity.getCropCode(),cropEntity.getCropName(),cropEntity.getScientificName(),cropEntity.getCategory(),cropEntity.getSeason(),cropEntity.getCropImage(),new ArrayList<>(),new ArrayList<>()));
             }
+            fieldDTOS.add(new FieldDTO(fieldEntity.getFieldCode(), fieldEntity.getName(), convertPointToLocation(fieldEntity.getLocation()), fieldEntity.getExtentSize(), fieldEntity.getFieldImage1(),fieldEntity.getFieldImage2(),equipmentDTOS,staffDTOS,logDTOS,cropDTOS));
         }
-        return fieldDTO;
+        return fieldDTOS;
     }
 
     @Override
