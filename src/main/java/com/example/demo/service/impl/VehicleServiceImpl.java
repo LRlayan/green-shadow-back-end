@@ -40,7 +40,7 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Override
     public List<VehicleDTO> getAllVehicle() {
-        return null;
+        return mapping.vehicleList(vehicleDAO.findAll());
     }
 
     @Override
