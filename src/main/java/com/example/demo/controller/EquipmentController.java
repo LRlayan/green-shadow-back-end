@@ -40,7 +40,7 @@ public class EquipmentController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<EquipmentDTO> getAllEquipment(){
-        return null;
+        return equipmentService.getAllEquipment();
     }
 
     @DeleteMapping(value = "/{equipmentId}")

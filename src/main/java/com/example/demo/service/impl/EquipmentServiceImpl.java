@@ -39,7 +39,7 @@ public class EquipmentServiceImpl implements EquipmentService {
 
     @Override
     public List<EquipmentDTO> getAllEquipment() {
-        return null;
+        return mapping.equipmentList(equipmentDAO.findAll());
     }
 
     @Override
