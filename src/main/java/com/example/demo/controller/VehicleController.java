@@ -39,7 +39,7 @@ public class VehicleController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<VehicleDTO> getAllVehicle(){
-        return null;
+        return vehicleService.getAllVehicle();
     }
 
     @DeleteMapping(value = "/{vehicleId}")
