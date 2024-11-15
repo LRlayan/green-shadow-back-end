@@ -46,8 +46,8 @@ public class Mapping {
         return modelMapper.map(equipmentEntity,EquipmentDTO.class);
     }
 
-    public List<EquipmentDTO> equipmentList(List<EquipmentDTO> equipmentDTO){
-        return modelMapper.map(equipmentDTO,new TypeToken<List<EquipmentDTO>>(){}.getType());
+    public List<EquipmentDTO> equipmentList(List<EquipmentEntity> equipmentEntities){
+        return modelMapper.map(equipmentEntities,new TypeToken<List<EquipmentDTO>>(){}.getType());
     }
 
     public FieldEntity toFieldEntity(FieldDTO fieldDTO){
