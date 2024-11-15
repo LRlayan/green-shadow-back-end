@@ -20,8 +20,8 @@ public class StaffDTO implements SuperDTO , StaffStatus {
     private String memberCode;
     private String firstName;
     private String lastName;
-    private LocalDate joinedDate;
-    private LocalDate dateOfBirth;
+    private String joinedDate;
+    private String dateOfBirth;
     private Gender gender;
     private String designation;
     private String addressLine1;
@@ -36,4 +36,8 @@ public class StaffDTO implements SuperDTO , StaffStatus {
     private List<VehicleDTO> vehicleList;
     private List<FieldDTO> fieldList;
     private List<LogDTO> logList;
+
+    public StaffDTO(String memberCode) {
+        this.memberCode = memberCode;
+    }
 }
